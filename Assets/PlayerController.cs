@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     int ammo = 100;
     int maxAmmo = 100;
-    public AudioClip audioClip;
+   // public AudioClip audioClip;
 
     // Start is called before the first frame update
     void Start()
@@ -30,29 +31,41 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-       /* if (Input.GetKeyDown(KeyCode.F))
+        /* if (Input.GetKeyDown(KeyCode.F))
+         {
+             animator.SetBool("", !animator.GetBool("IsAiming"));
+         }*/
+        if (Input.GetMouseButton(0) && !animator.GetBool("isFiring"))
         {
-            animator.SetBool("", !animator.GetBool("IsAiming"));
-        }*/
-        if (Input.GetMouseButton(0))
-        {
-            /*if (ammo > 0)
+            if (ammo > 0)
             {
                 // animator.SetBool("isFiring", !animator.GetBool("isFiring"));
-                
-                
+
+                animator.SetTrigger("isFiring");
+                Debug.Log("Firing State");
+                //WhenPlayerHitEnemy();
+                //audioSource.Play();
                 //WhenZombieeGotHit();
+                //this.GetComponent<PlayerScript>().FiringState();
+
+
                 ammo = Mathf.Clamp(ammo - 10, 0, maxAmmo);
                 // Debug.Log(ammo);
             }
+
             else
             {
                 //Trigger the sound for empty bullets.
-            }*/
-            animator.SetTrigger("isFiring");
+            }
 
         }
     }
+
+    /*private void WhenPlayerHitEnemy()
+    {
+        throw new NotImplementedException();
+    }*/
+
     private void FixedUpdate()
     {
         inputX = Input.GetAxis("Horizontal");

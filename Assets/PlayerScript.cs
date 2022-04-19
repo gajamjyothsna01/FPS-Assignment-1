@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     Animator animator;
-    public AudioSource audioSource;
-    public AudioClip clip;
+   // public AudioSource audioSource;
+    //public AudioClip clip;
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();   
-        audioSource = GetComponent<AudioSource>();
-        clip = GetComponent<AudioClip>();
+       animator = GetComponent<Animator>();   
+       // audioSource = GetComponent<AudioSource>();
+       // clip = GetComponent<AudioClip>();
         
 
          animator.SetBool("isIdle", true);
@@ -29,13 +29,13 @@ public class PlayerScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.J))
         {
             animator.SetBool("isWalking", true);
-            audioSource.Play();
+           // audioSource.Play();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+       /* if (Input.GetKeyDown(KeyCode.Space))
         {
             animator.SetTrigger("isFiring");
             audioSource.Play();
-        }
+        }*/
         if (Input.GetKeyDown(KeyCode.C))
         {
             animator.SetBool("isReload",true);
