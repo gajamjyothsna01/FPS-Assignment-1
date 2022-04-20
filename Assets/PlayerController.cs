@@ -41,14 +41,14 @@ public class PlayerController : MonoBehaviour
          {
              animator.SetBool("", !animator.GetBool("IsAiming"));
          }*/
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            if (ammo > 0)
-            {
-                // animator.SetBool("isFiring", !animator.GetBool("isFiring"));
+             // animator.SetBool("isFiring", !animator.GetBool("isFiring"));
                 Debug.Log("Firing State");
-                animator.SetBool("isFiring",true);
+                animator.SetTrigger("isFiring");
                 Debug.Log("Player Hit Method");
+                Debug.Log("Ammo Firing" +ammo);
+                ammo--;
                 
                 WhenPlayerHitEnemy();
                 //audioSource.Play();
@@ -56,14 +56,10 @@ public class PlayerController : MonoBehaviour
                 //this.GetComponent<PlayerScript>().FiringState();
 
 
-                ammo = Mathf.Clamp(ammo - 10, 0, maxAmmo);
+               // ammo = Mathf.Clamp(ammo - 10, 0, maxAmmo);
                 // Debug.Log(ammo);
-            }
+            
 
-            else
-            {
-                //Trigger the sound for empty bullets.
-            }
 
         }
     }
@@ -138,8 +134,30 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ammo" && ammo < maxAmmo)
+        {
+            Debug.Log("Near to Ammo");
+            collision.gameObject.SetActive(false);
+            Debug.Log("Collected Ammo Box");
+            // ammo = ammo + 10;
+            ammo = Mathf.Clamp(ammo + 10, 0, maxAmmo);
+            Debug.Log("Ammo" + ammo);
+        }
+        if (collision.gameObject.tag == "Health" && health < maxHealth)
+        {
+            Debug.Log("Near to Health");
+            collision.gameObject.SetActive(false);
+            Debug.Log("Collected Health Box");
+            // medical = medical + 10;
+            health = Mathf.Clamp(health + 10, 0, maxHealth);
 
-    public void HittingPlayer(float hittingValue)
+
+        }
+    }
+
+        public void HittingPlayer(float hittingValue)
     {
         //hitting value is the Value of health that to be decreased.
 
