@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
@@ -21,8 +21,10 @@ public class PlayerController : MonoBehaviour
     public Transform bulletLaunchPosition;
     int health = 100;
     int maxHealth = 100;
+   // public SpriteRenderer sprite;
+   // public bool isGameWin = false;
     //public GameObject target;
-   // public AudioClip audioClip;
+    // public AudioClip audioClip;
 
     // Start is called before the first frame update
     void Start()
@@ -52,9 +54,7 @@ public class PlayerController : MonoBehaviour
                 
                 WhenPlayerHitEnemy();
                 //audioSource.Play();
-                //WhenZombieeGotHit();
-                //this.GetComponent<PlayerScript>().FiringState();
-
+               
 
                // ammo = Mathf.Clamp(ammo - 10, 0, maxAmmo);
                 // Debug.Log(ammo);
@@ -163,6 +163,16 @@ public class PlayerController : MonoBehaviour
 
         health = (int)(Mathf.Clamp(health - hittingValue, 0, maxHealth));
         Debug.Log("Health" +health);
+        if(health <=0)
+        {
+            Debug.Log("GameOver");
+            Debug.Log("Player is Dead");
+            Destroy(this.gameObject);
+           GameObject.Find("PBRCharacter 1").GetComponent<EnemyController>().TurnOffAllTriggerAnim();
+           // sprite.enabled = true;
+           // isGameWin = true;
+
+        }
     }
    
 }
