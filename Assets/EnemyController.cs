@@ -108,6 +108,10 @@ public class EnemyController : MonoBehaviour
                 print("Firing State");
                 break;
             case STATE.DIE:
+                TurnOffAllTriggerAnim();
+                animator.SetBool("isDead", true);
+                Debug.Log("Entered Dead State");
+
                 break;
             default:
                 break;
@@ -142,6 +146,13 @@ public class EnemyController : MonoBehaviour
         return Vector3.Distance(target.transform.position, this.transform.position);
     }
 
+    public void DeadEnemy()
+    {
+        Debug.Log("Dead State");
+        state = STATE.DIE;
+        //animator.SetBool("isDead", true);
+       
+    }
 
 }
 //Checking for Game Over or not.

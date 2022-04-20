@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     int ammo = 100;
     int maxAmmo = 100;
+    public Transform bulletLaunchPosition;
    // public AudioClip audioClip;
 
     // Start is called before the first frame update
@@ -25,25 +26,28 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();  
+        //animator = GetComponent<Animator>();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        animator.SetBool("isWalking", true);
         /* if (Input.GetKeyDown(KeyCode.F))
          {
              animator.SetBool("", !animator.GetBool("IsAiming"));
          }*/
-        if (Input.GetMouseButton(0) && !animator.GetBool("isFiring"))
+        if (Input.GetMouseButton(0))
         {
             if (ammo > 0)
             {
                 // animator.SetBool("isFiring", !animator.GetBool("isFiring"));
-
-                animator.SetTrigger("isFiring");
                 Debug.Log("Firing State");
-                //WhenPlayerHitEnemy();
+                animator.SetBool("isFiring",true);
+                Debug.Log("Player Hit Method");
+                
+                WhenPlayerHitEnemy();
                 //audioSource.Play();
                 //WhenZombieeGotHit();
                 //this.GetComponent<PlayerScript>().FiringState();
@@ -61,10 +65,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*private void WhenPlayerHitEnemy()
+    private void WhenPlayerHitEnemy()
     {
-        throw new NotImplementedException();
-    }*/
+        RaycastHit hitInformation;
+        Debug.Log("Got the Ray Info");
+        if (Physics.Raycast(bulletLaunchPosition.position, bulletLaunchPosition.forward, out hitInformation, 100f))
+        {
+            Debug.Log("Bulleted Hit the enemy");
+
+            GameObject hitEnenimes = hitInformation.collider.gameObject;
+            if (hitEnenimes.tag == "Enemy")
+            {
+                Debug.Log("Enemy Found");
+                hitEnenimes.GetComponent<EnemyController>().DeadEnemy();
+                Debug.Log("Going to Dead state in EC");
+            }
+        }
+    }
 
     private void FixedUpdate()
     {
