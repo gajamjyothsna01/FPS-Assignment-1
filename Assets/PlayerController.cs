@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     int ammo = 100;
     int maxAmmo = 100;
     public Transform bulletLaunchPosition;
+    int health = 100;
+    int maxHealth = 100;
+    //public GameObject target;
    // public AudioClip audioClip;
 
     // Start is called before the first frame update
@@ -136,4 +139,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void HittingPlayer(float hittingValue)
+    {
+        //hitting value is the Value of health that to be decreased.
+
+        health = (int)(Mathf.Clamp(health - hittingValue, 0, maxHealth));
+        Debug.Log("Health" +health);
+    }
+   
 }

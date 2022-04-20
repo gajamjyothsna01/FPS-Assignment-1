@@ -153,6 +153,12 @@ public class EnemyController : MonoBehaviour
         //animator.SetBool("isDead", true);
        
     }
+    int damageAmount = 5;
+    private void damageAmountPlayer()
+    {
+        target.GetComponent<PlayerController>().HittingPlayer(damageAmount);
+    }
+
 
 }
 //Checking for Game Over or not.
