@@ -22,10 +22,11 @@ public class PlayerController : MonoBehaviour
     int health = 100;
     int maxHealth = 100;
     public GameObject[] weapons;
-   // public SpriteRenderer sprite;
-   // public bool isGameWin = false;
+    // public SpriteRenderer sprite;
+    // public bool isGameWin = false;
     //public GameObject target;
     // public AudioClip audioClip;
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
                 ammo--;
                 
                 WhenPlayerHitEnemy();
-                //audioSource.Play();
+                audioSource.Play();
                
 
                // ammo = Mathf.Clamp(ammo - 10, 0, maxAmmo);
