@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public Transform bulletLaunchPosition;
     int health = 100;
     int maxHealth = 100;
+    public GameObject[] weapons;
    // public SpriteRenderer sprite;
    // public bool isGameWin = false;
     //public GameObject target;
@@ -31,6 +32,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();  
+        weapons = GetComponent<GameObject[]>();
+        weapons[0].SetActive(false);
+        weapons[1].SetActive(false);
         //animator = GetComponent<Animator>();
        
     }
@@ -38,6 +42,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         animator.SetBool("isWalking", true);
         /* if (Input.GetKeyDown(KeyCode.F))
          {
@@ -61,6 +66,17 @@ public class PlayerController : MonoBehaviour
             
 
 
+        }
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            weapons[0].SetActive(true);
+            weapons[1].SetActive(false);
+
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            weapons[1].SetActive(true);
+            weapons[0].SetActive(false);
         }
     }
 
