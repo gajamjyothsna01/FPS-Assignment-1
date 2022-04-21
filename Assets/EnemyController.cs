@@ -10,7 +10,8 @@ public class EnemyController : MonoBehaviour
     public GameObject target;
     public float walkingSpeed;
     public float runningSpeed;
-    
+    public AudioSource audioSourcewalking;
+    public AudioSource walkingSourceFiring;
     enum STATE { IDLE, WALK, RUN, FIRE,DIE};
     STATE state = STATE.IDLE;
     // Start is called before the first frame update
@@ -52,6 +53,7 @@ public class EnemyController : MonoBehaviour
                     agent.speed = walkingSpeed;
                     TurnOffAllTriggerAnim();
                     animator.SetBool("isWalking", true);
+                    audioSourcewalking.Play();
                 }
                 if (SeeTheplayer())
                 {
@@ -100,6 +102,7 @@ public class EnemyController : MonoBehaviour
                 }
                 TurnOffAllTriggerAnim();
                 animator.SetBool("isFiring", true);
+                walkingSourceFiring.Play();
                 transform.LookAt(target.transform.position);//Zombies should look at Player
                 if (DistanceBetweenPlayer() > agent.stoppingDistance + 2)
                 {
